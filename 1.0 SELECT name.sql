@@ -57,19 +57,19 @@ WHERE name LIKE capital;
 -- 12 country where the capital is the country plus "City"
 SELECT name
 FROM world
-WHERE capital LIKE concat(name, ' City');
+WHERE capital LIKE CONCAT(name, ' City');
 
 -- 13 capital and the name where the capital includes the name of the country
 SELECT capital, name
 FROM world
-WHERE capital LIKE concat('%', name, '%');
+WHERE capital LIKE CONCAT('%', name, '%');
 
 -- 14 capital and the name where the capital is an extension of name of the country
 SELECT capital, name
 FROM world
-WHERE capital LIKE concat(name, '_%');
+WHERE capital LIKE CONCAT(name, '_%');
 
 -- 15 name and the extension where the capital is an extension of name of the country
 SELECT name, REPLACE(capital, name, '') AS extension
 FROM world
-WHERE capital LIKE concat(name, '_%');
+WHERE capital LIKE CONCAT(name, '_%');
