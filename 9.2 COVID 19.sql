@@ -43,3 +43,11 @@ SELECT world.name,
 FROM covid JOIN world ON covid.name = world.name
 WHERE whn = '2020-04-20' AND population >= 10000000
 ORDER BY population DESC;
+
+-- 08 show the date of the peak number of new cases
+SELECT *
+FROM (SELECT tw.name, DATE_FORMAT(tw.whn,'%Y-%m-%d'), MAX(tw.confirmed - lw.confirmed) peakNewCases
+      FROM covid tw LEFT JOIN covid lw ON DATE_ADD(lw.whn, INTERVAL 1 DAY) = tw.whn AND tw.name = lw.name
+      GROUP BY tw.name
+      ORDER BY tw.whn
+) tmp WHERE peakNewCases > 1000;
